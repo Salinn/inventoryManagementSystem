@@ -121,7 +121,9 @@ public class main {
         } catch(NumberFormatException e) {
             return false;
         }
-        // only got here if we didn't return false
+        if ( Integer.parseInt(s) < 0 ){
+            return false;
+        }
         return true;
     }
 

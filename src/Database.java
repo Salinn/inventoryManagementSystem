@@ -49,6 +49,9 @@ public class Database implements InventoryManagementSystem {
         Item item = items.get(productId);
         item.addAmount(amountToRestock);
 
+        System.out.println("The number of " + item.getName() + "'s left is " + item.getLevels());
+        System.out.println(item.getName() + " can be found in " + item.getRoom().getName());
+
         RestockingResult restockingResult = new RestockingResult(this);
         return restockingResult;
     }
