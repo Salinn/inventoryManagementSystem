@@ -34,13 +34,26 @@ public class main {
             case 1:
                 productId = check_if_product_exists(db);
                 amountToPick = check_if_enough_product(productId, db);
-                db.pickProduct(productId, amountToPick);
+                PickingResult pickingResult = db.pickProduct(productId, amountToPick);
+
+                System.out.println("The number of " + pickingResult.getItem().getName() + "'s left is " +
+                        pickingResult.getItem().getLevels());
+                System.out.println(pickingResult.getItem().getName() + " can be found in " +
+                        pickingResult.getItem().getRoom().getName());
+
                 System.out.println();
                 break;
             case 2:
                 productId = check_if_product_exists(db);
                 amountToRestock = how_much_to_stock();
-                db.restockProduct(productId,amountToRestock);
+
+                RestockingResult restockingResult = db.restockProduct(productId,amountToRestock);
+
+                System.out.println("The number of " + restockingResult.getItem().getName() + "'s left is "
+                        + restockingResult.getItem().getLevels());
+                System.out.println(restockingResult.getItem().getName() + " can be found in " +
+                        restockingResult.getItem().getRoom().getName());
+
                 System.out.println();
                 break;
             case 3:

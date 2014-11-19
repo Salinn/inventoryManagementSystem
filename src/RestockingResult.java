@@ -2,13 +2,13 @@
  * Created by salinn on 11/18/14.
  */
 public class RestockingResult {
-    private Database db;
+    private Item item;
 
     public RestockingResult(Database db){
-        this.db = db;
+        this.item = item;
     }
 
-    public Database getdb(){
-        return this.db;
+    public Item getItem(){
+        return this.item;
     }
 }

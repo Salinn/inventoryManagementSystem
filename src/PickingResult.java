@@ -2,13 +2,13 @@
  * Created by salinn on 11/18/14.
  */
 public class PickingResult {
-    private Database db;
+    private Item item;
 
     public PickingResult(Database db){
-        this.db = db;
+        this.item = item;
     }
 
-    public Database getdb(){
-        return this.db;
+    public Item getItem(){
+        return this.item;
     }
 }
