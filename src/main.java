@@ -1,36 +1,45 @@
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by salinn on 11/19/14.
  */
 public class main {
+    public static Database db = new Database();
+    public static Lock lock = new ReentrantLock();
 
     public static void main(String args[]) {
-        int choice = 0;
-        Database db = new Database();
-
         db = intializer(db);
+        new Thread(new runner()).start();
+    }
 
-        while (choice != 4) {
-            Scanner in = new Scanner(System.in);
-            System.out.println("Please pick an option");
-            System.out.println("1 = Picking out an item");
-            System.out.println("2 = Restocking out an item");
-            System.out.println("3 = View an item");
-            System.out.println("4 = Exit system");
-            choice = Integer.parseInt(in.nextLine());
-            db = executor(choice,db);
+    static class runner implements Runnable {
+        public void run(){
+            int choice = 0;;
+
+            while (choice != 4) {
+                Scanner in = new Scanner(System.in);
+                System.out.println("Please pick an option");
+                System.out.println("1 = Picking out an item");
+                System.out.println("2 = Restocking out an item");
+                System.out.println("3 = View an item");
+                System.out.println("4 = Exit system");
+                choice = Integer.parseInt(in.nextLine());
+                db = executor(choice);
+            }
         }
     }
-    public static synchronized Database executor(int choice, Database db){
+
+    public static Database executor(int choice){
         String productId;
         int amountToPick;
         int amountToRestock;
 
-        switch (choice) {
+        lock.lock();
+        try {
+            switch (choice) {
             case 1:
                 productId = check_if_product_exists(db);
                 amountToPick = check_if_enough_product(productId, db);
@@ -65,6 +74,9 @@ public class main {
                 System.out.println("Thanks for using our system");
                 System.out.println();
                 break;
+            }
+        } finally {
+            lock.unlock();
         }
 
         return db;

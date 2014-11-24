@@ -4,7 +4,7 @@
 public class RestockingResult {
     private Item item;
 
-    public RestockingResult(Database db){
+    public RestockingResult(Item item){
         this.item = item;
     }
 

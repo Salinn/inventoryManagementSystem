@@ -4,7 +4,7 @@
 public class PickingResult {
     private Item item;
 
-    public PickingResult(Database db){
+    public PickingResult(Item item){
         this.item = item;
     }
 

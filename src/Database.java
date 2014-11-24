@@ -39,14 +39,14 @@ public class Database implements InventoryManagementSystem {
         Item item = items.get(productId);
         item.removeAmount(amountToPick);
 
-        PickingResult pickingResult = new PickingResult(this);
+        PickingResult pickingResult = new PickingResult(item);
         return pickingResult;
     }
     public RestockingResult restockProduct(String productId, int amountToRestock){
         Item item = items.get(productId);
         item.addAmount(amountToRestock);
 
-        RestockingResult restockingResult = new RestockingResult(this);
+        RestockingResult restockingResult = new RestockingResult(item);
         return restockingResult;
     }
 }
